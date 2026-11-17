@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Surprise Sunday: Part II ❤️</title>
+<meta name="description" content="Something special is planned for Sunday… but you have to win the clues first.">
+<meta property="og:title" content="Surprise Sunday: Part II ❤️">
+<meta property="og:description" content="Something special is planned for Sunday… but you have to win the clues first.">
+<meta name="theme-color" content="#f5eddd">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5eddd;
+    --paper-2: #ede1c8;
+    --card: #fffaf0;
+    --ink: #1e3b2d;
+    --ink-soft: #536b5d;
+    --green: #2f6b4a;
+    --green-2: #3a7d57;
+    --sage: #b9cfb1;
+    --blush: #f2b8b0;
+    --rose: #d2574f;
+    --gold: #d8a23e;
+    --line: rgba(30, 59, 45, .16);
+    --shadow: 0 22px 44px -22px rgba(30, 59, 45, .5);
+    --radius: 24px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(900px 520px at 115% -10%, rgba(242, 184, 176, .5), transparent 60%),
+      radial-gradient(800px 520px at -25% 35%, rgba(185, 207, 177, .6), transparent 60%),
+      radial-gradient(700px 520px at 120% 95%, rgba(216, 162, 62, .2), transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .hidden { display: none !important; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  /* ---------- falling petals ---------- */
+  .petals { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+  .petal {
+    position: absolute; top: -30px;
+    border-radius: 70% 0 70% 0;
+    opacity: .6;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    0%   { transform: translate3d(0, -20px, 0) rotate(0deg); }
+    100% { transform: translate3d(var(--drift), 112vh, 0) rotate(var(--spin)); }
+  }
+
+  /* ---------- layout ---------- */
+  .app {
+    position: relative; z-index: 2;
+    max-width: 440px; margin: 0 auto;
+    padding: 28px 16px 40px;
+  }
+  .screen { display: none; }
+  .screen.active { display: block; animation: rise .7s cubic-bezier(.2, .8, .2, 1); }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .eyebrow {
+    font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    font-weight: 700; color: var(--green);
+  }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: -.01em; }
+  h1 { font-size: clamp(28px, 8.4vw, 35px); line-height: 1.1; margin: 10px 0 12px; }
+  h2 { font-size: 31px; line-height: 1.1; margin: 6px 0 8px; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--rose); }
+  .lede { color: var(--ink-soft); font-size: 16px; }
+  .lede strong { color: var(--ink); }
+
+  .btn {
+    appearance: none; border: 0; cursor: pointer;
+    font: inherit; font-weight: 700; font-size: 16px;
+    padding: 15px 24px; border-radius: 16px;
+    transition: transform .25s ease, background .2s, box-shadow .2s, opacity .2s;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 12px 22px -12px rgba(47, 107, 74, .9); }
+  .btn-primary:hover:not(:disabled) { background: var(--green-2); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-block { width: 100%; }
+
+  .sleeps {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--paper-2); font-weight: 700; font-size: 14px;
+  }
+
+  /* ---------- photo ---------- */
+  .photo-wrap {
+    width: 118px; height: 118px; margin: 0 auto 18px; padding: 5px; border-radius: 50%;
+    background: conic-gradient(from 200deg, var(--blush), var(--gold), var(--sage), var(--blush));
+  }
+  .photo-wrap.small { width: 92px; height: 92px; margin-bottom: 14px; }
+  .photo, .photo-fallback {
+    width: 100%; height: 100%; border-radius: 50%;
+    border: 3px solid var(--card); display: block; object-fit: cover; background: var(--paper-2);
+  }
+  .photo-fallback { display: none; place-items: center; font-size: 42px; }
+  .no-photo .photo { display: none; }
+  .no-photo .photo-fallback { display: grid; }
+
+  /* ---------- intro ---------- */
+  .intro { padding: 34px 22px 26px; text-align: center; position: relative; overflow: hidden; }
+  .stamp {
+    position: absolute; top: 16px; right: 14px; width: 66px; height: 66px;
+    border: 2px dashed var(--rose); border-radius: 50%; color: var(--rose);
+    display: grid; place-items: center; transform: rotate(14deg);
+    font-family: 'Caveat', cursive; font-weight: 700; font-size: 20px; line-height: .85;
+  }
+  .intro .sleeps { margin-top: 20px; }
+  .ask { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 21px; margin: 24px 0 16px; }
+  .yn { display: flex; gap: 12px; justify-content: center; align-items: center; min-height: 70px; }
+  .no-msg { min-height: 24px; margin-top: 12px; font-size: 15px; font-weight: 500; color: var(--rose); }
+
+  /* ---------- map ---------- */
+  .map-head { text-align: center; margin-bottom: 18px; }
+  .progress { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .progress span { width: 36px; height: 6px; border-radius: 99px; background: var(--line); transition: background .5s; }
+  .progress span.on { background: var(--rose); }
+
+  .map {
+    padding: 8px;
+    background-color: #fbf5e6;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 27px, rgba(30, 59, 45, .045) 27px 28px),
+      repeating-linear-gradient(90deg, transparent 0 27px, rgba(30, 59, 45, .045) 27px 28px);
+  }
+  .map svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+  .trail { fill: none; stroke: var(--ink-soft); stroke-width: 2.5; stroke-dasharray: 1.5 9; stroke-linecap: round; opacity: .55; }
+  .trail-done { fill: none; stroke: var(--rose); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset 1.5s ease-in-out; }
+
+  .pin { cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+  .hit { fill: transparent; }
+  .pin-bg { fill: var(--card); stroke: var(--line); stroke-width: 2; transition: fill .4s, stroke .4s; }
+  .pin-icon { font-family: 'DM Sans', sans-serif; font-size: 19px; font-weight: 700; fill: var(--ink-soft); }
+  .pin-label { font-family: 'Caveat', cursive; font-size: 23px; font-weight: 700; fill: var(--ink); }
+  .pin-sub { font-family: 'Caveat', cursive; font-size: 18px; font-weight: 500; fill: var(--ink-soft); }
+  .pulse { fill: none; stroke: var(--gold); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+
+  .pin.locked { opacity: .55; }
+  .pin.current .pin-bg { fill: var(--gold); stroke: #fff; stroke-width: 3; }
+  .pin.current .pin-icon { fill: #fff; }
+  .pin.current .pin-sub { fill: var(--rose); font-weight: 700; }
+  .pin.current .pulse { animation: pulse 1.8s ease-out infinite; }
+  .pin.done .pin-bg { fill: #fff; stroke: var(--rose); stroke-width: 2.5; }
+  .pin:focus-visible .pin-bg { stroke: var(--gold); stroke-width: 4; }
+  @keyframes pulse { 0% { transform: scale(.95); opacity: .9; } 100% { transform: scale(1.75); opacity: 0; } }
+
+  .pin-body.shake { animation: shake .45s; }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-3px); } }
+
+  .map-hint { text-align: center; font-family: 'Caveat', cursive; font-size: 23px; color: var(--ink-soft); margin: 16px 0 14px; min-height: 30px; }
+
+  /* ---------- game sheet ---------- */
+  .sheet-wrap {
+    position: fixed; inset: 0; z-index: 20;
+    background: rgba(20, 35, 27, .5);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    display: flex; align-items: flex-end; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  .sheet-wrap.open { opacity: 1; pointer-events: auto; }
+  .sheet {
+    position: relative; width: 100%; max-width: 460px; max-height: 94vh; max-height: 94dvh; overflow-y: auto;
+    background: var(--card); border-radius: 28px 28px 0 0;
+    padding: 26px 18px calc(24px + env(safe-area-inset-bottom));
+    transform: translateY(48px); transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+  }
+  .sheet-wrap.open .sheet { transform: none; }
+  @media (min-width: 600px) { .sheet-wrap { align-items: center; } .sheet { border-radius: 28px; } }
+  .sheet-close {
+    position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    font-size: 24px; line-height: 1; cursor: pointer;
+  }
+  .sheet h3 { font-size: 25px; line-height: 1.15; margin: 6px 44px 6px 0; }
+  .sheet-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 18px; }
+  .sheet-sub:empty { display: none; }
+  .game-msg { text-align: center; min-height: 46px; font-weight: 500; color: var(--ink-soft); margin: 12px 0 6px; font-size: 15px; }
+
+  /* putt */
+  .track {
+    position: relative; height: 250px; border-radius: 22px; overflow: hidden;
+    background: repeating-linear-gradient(180deg, #5f9d65 0 26px, #69a86f 26px 52px);
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .28), inset 0 -40px 40px -24px rgba(0, 0, 0, .22);
+  }
+  .hole {
+    position: absolute; left: 50%; top: 70px; width: 26px; height: 14px; margin-left: -13px;
+    border-radius: 50%; background: #17291e; box-shadow: inset 0 3px 4px rgba(0, 0, 0, .6);
+  }
+  .flag { position: absolute; left: 12px; bottom: 7px; width: 2px; height: 56px; background: #f4f4f4; border-radius: 2px; }
+  .flag::after {
+    content: ''; position: absolute; left: 2px; top: 0; width: 26px; height: 17px;
+    background: var(--rose); clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform-origin: left center; animation: wave 1.8s ease-in-out infinite;
+  }
+  @keyframes wave { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.82) skewY(4deg); } }
+  .ball {
+    position: absolute; left: 50%; bottom: 26px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff, #ececec 60%, #c7c7c7);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    transition: transform 1s cubic-bezier(.15, .75, .3, 1), opacity .3s;
+  }
+  .meter { position: relative; height: 22px; margin: 18px 0 6px; border-radius: 99px; background: var(--paper-2); border: 1px solid var(--line); }
+  .zone { position: absolute; top: 2px; bottom: 2px; border-radius: 99px; background: var(--green); transition: left .5s, width .5s; }
+  .needle { position: absolute; top: -5px; bottom: -5px; width: 5px; margin-left: -2.5px; border-radius: 3px; background: var(--ink); box-shadow: 0 0 0 2px #fff; }
+  .meter-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: var(--ink-soft); margin: 0 2px 14px; }
+
+  /* rock paper scissors */
+  .score { display: flex; justify-content: space-between; align-items: center; background: var(--paper); border-radius: 18px; padding: 12px 18px; }
+  .score > div { text-align: center; }
+  .score span { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .score b { font-family: 'Fraunces', Georgia, serif; font-size: 30px; line-height: 1.1; }
+  .vs { font-family: 'Caveat', cursive; font-size: 21px; color: var(--rose); }
+  .arena { display: flex; justify-content: space-around; align-items: center; height: 130px; font-size: 66px; line-height: 1; }
+  .hand { display: inline-block; }
+  .hand.him span { display: inline-block; transform: scaleX(-1); }
+  .hand.pumping { animation: pump .3s ease-in-out 3; }
+  @keyframes pump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
+  .choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .choices button {
+    font: inherit; font-size: 34px; line-height: 1.1; color: var(--ink);
+    padding: 12px 0 9px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--paper);
+    cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: transform .2s, background .2s; touch-action: manipulation;
+  }
+  .choices button:active { transform: scale(.95); }
+  .choices button:disabled { opacity: .45; cursor: default; }
+  .choices small { font-size: 13px; font-weight: 700; }
+  #rematch { margin-top: 12px; }
+
+  /* memory */
+  .memory { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; perspective: 900px; }
+  .mcard { position: relative; aspect-ratio: 3 / 4; border: 0; background: none; padding: 0; cursor: pointer; touch-action: manipulation; }
+  .mcard .inner { position: absolute; inset: 0; transition: transform .45s; transform-style: preserve-3d; }
+  .mcard.flip .inner, .mcard.matched .inner { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; border-radius: 14px; display: grid; place-items: center;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  }
+  .back {
+    background-color: var(--green);
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .08) 0 6px, transparent 6px 12px);
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .22);
+    color: rgba(255, 255, 255, .8); font-size: 18px;
+  }
+  .front { background: var(--paper); border: 1.5px solid var(--line); transform: rotateY(180deg); font-size: 32px; }
+  .mcard.matched .front { background: #fde6e1; border-color: var(--blush); }
+
+  /* scratch */
+  .scratch { position: relative; height: 210px; border-radius: 22px; overflow: hidden; background: var(--paper); border: 2px dashed var(--blush); }
+  .scratch-under { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 18px; font-size: 16px; }
+  .scratch-under .big { font-size: 50px; line-height: 1.1; margin-bottom: 6px; }
+  .scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; transition: opacity .7s; }
+
+  /* clue reveal */
+  .clue { text-align: center; padding: 6px 2px 2px; animation: rise .6s cubic-bezier(.2, .8, .2, 1); }
+  .clue-icon {
+    width: 88px; height: 88px; margin: 4px auto 16px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 42px;
+    background: var(--paper); border: 2px dashed var(--rose);
+  }
+  .clue-text { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 20px; line-height: 1.45; margin: 0 0 24px; }
+  .clue-text em { color: var(--rose); }
+
+  /* ---------- ticket ---------- */
+  .ticket { position: relative; overflow: hidden; background: var(--card); border: 1px solid var(--line); border-radius: 26px; box-shadow: var(--shadow); }
+  .ticket-top { background: var(--green); color: #fff; text-align: center; padding: 26px 22px 24px; }
+  .ticket-top .eyebrow { color: var(--blush); }
+  .ticket-top h2 { color: #fff; margin-bottom: 0; }
+  .ticket-top h2 em { color: var(--blush); }
+  .ticket-top .photo, .ticket-top .photo-fallback { border-color: var(--green); }
+  .ticket-grid { padding: 22px 22px 4px; display: grid; gap: 15px; }
+  .ticket-grid > div { display: grid; grid-template-columns: 68px 1fr; gap: 12px; align-items: baseline; }
+  .ticket-grid dt { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--green); }
+  .ticket-grid dd { font-weight: 500; }
+  .ticket-grid dd span { display: block; color: var(--ink-soft); font-size: 14px; font-weight: 400; }
+  .ticket-route { margin: 18px 22px 0; padding-top: 16px; border-top: 1px dashed var(--line); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; font-size: 26px; line-height: 1.2; }
+  .ticket-route small { display: block; font-family: 'Caveat', cursive; font-size: 17px; line-height: 1.05; color: var(--ink-soft); margin-top: 4px; }
+  .perf { position: relative; height: 30px; margin-top: 12px; }
+  .perf::before { content: ''; position: absolute; left: 24px; right: 24px; top: 50%; border-top: 2px dashed var(--line); }
+  .perf i { position: absolute; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--paper); }
+  .perf i:first-child { left: -15px; box-shadow: inset -1px 0 0 var(--line); }
+  .perf i:last-child { right: -15px; box-shadow: inset 1px 0 0 var(--line); }
+  .stub { display: grid; grid-template-columns: auto auto auto; justify-content: space-between; gap: 10px 16px; padding: 4px 22px 22px; }
+  .stub small { display: block; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .stub b { font-family: 'Fraunces', Georgia, serif; font-size: 17px; }
+  .barcode {
+    grid-column: 1 / -1; height: 46px; margin-top: 8px; border-radius: 4px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 14px, var(--ink) 14px 17px, transparent 17px 19px);
+  }
+  .barcode-caption { grid-column: 1 / -1; text-align: center; font-size: 11px; letter-spacing: .3em; color: var(--ink-soft); font-weight: 700; }
+
+  .final { text-align: center; margin-top: 22px; }
+  .final .sleeps { margin-bottom: 16px; }
+  .final-note { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 19px; line-height: 1.5; }
+  .final-note small { display: block; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+  .stack { display: grid; gap: 10px; margin-top: 20px; }
+  .link-btn { display: block; margin: 18px auto 0; background: none; border: 0; font: inherit; font-size: 14px; color: var(--ink-soft); text-decoration: underline; cursor: pointer; }
+  .sign { text-align: center; font-family: 'Caveat', cursive; font-size: 20px; color: var(--ink-soft); margin-top: 26px; }
+
+  /* ---------- confetti ---------- */
+  .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
+  .bit { position: absolute; width: 9px; height: 14px; margin: -7px 0 0 -4px; border-radius: 2px; }
+  .bit.heart { width: auto; height: auto; font-size: 16px; margin: -10px 0 0 -8px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<main class="app">
+
+  <!-- ============ INTRO ============ -->
+  <section class="screen" id="screen-intro">
+    <div class="card intro">
+      <div class="stamp" aria-hidden="true">Part<br>II</div>
+      <div class="photo-wrap">
+        <img class="photo" src="photo.jpg" alt="Us" onerror="this.parentElement.classList.add('no-photo')">
+        <span class="photo-fallback" aria-hidden="true">❤️</span>
+      </div>
+      <p class="eyebrow">Surprise Sunday</p>
+      <h1>Princess, you've been invited… <em>again.</em></h1>
+      <p class="lede">Last time was just the warm-up. Your Husband has planned a brand new adventure with <strong>four secret stops</strong>, and every clue has to be <strong>won</strong>.</p>
+      <div class="sleeps" data-sleeps></div>
+      <p class="ask">So… are you free on Sunday the 22nd?</p>
+      <div class="yn">
+        <button class="btn btn-primary" id="btn-yes">Yes ❤️</button>
+        <button class="btn btn-ghost" id="btn-no">No 😭</button>
+      </div>
+      <p class="no-msg" id="no-msg" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ============ MAP ============ -->
+  <section class="screen" id="screen-map">
+    <header class="map-head">
+      <p class="eyebrow">Sunday · 22 November</p>
+      <h2>The Sunday <em>Route</em></h2>
+      <p class="lede">Four secret stops. Beat each challenge to unlock its clue.</p>
+      <div class="progress" id="progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </header>
+
+    <div class="card map">
+      <svg viewBox="0 0 340 580" role="group" aria-label="Map of the date with four secret stops">
+        <!-- scenery -->
+        <g aria-hidden="true">
+          <!-- compass -->
+          <g transform="translate(304 40)" opacity=".55">
+            <circle r="17" fill="none" stroke="#536b5d" stroke-width="1.5"/>
+            <path d="M0 -13 L4 0 L0 13 L-4 0 Z" fill="#d2574f"/>
+            <path d="M0 0 L4 0 L0 13 L-4 0 Z" fill="#536b5d"/>
+            <text y="-21" text-anchor="middle" font-family="Caveat, cursive" font-size="15" font-weight="700" fill="#536b5d">N</text>
+          </g>
+          <!-- bushes -->
+          <g transform="translate(34 168)"><circle r="12" fill="#b9cfb1"/><circle cx="13" cy="4" r="9" fill="#a5c19c"/><circle cx="-10" cy="6" r="7" fill="#cbdcc4"/></g>
+          <g transform="translate(300 268)"><circle r="11" fill="#a5c19c"/><circle cx="-12" cy="5" r="8" fill="#b9cfb1"/><circle cx="10" cy="7" r="7" fill="#cbdcc4"/></g>
+          <g transform="translate(36 384)"><circle r="10" fill="#cbdcc4"/><circle cx="12" cy="3" r="8" fill="#b9cfb1"/></g>
+          <g transform="translate(302 486)"><circle r="12" fill="#b9cfb1"/><circle cx="-12" cy="6" r="8" fill="#a5c19c"/></g>
+          <!-- pines -->
+          <g transform="translate(152 116)" fill="#8fb08a"><path d="M0 -18 L11 4 L-11 4 Z"/><rect x="-1.5" y="4" width="3" height="6" fill="#9b7b58"/></g>
+          <g transform="translate(170 122)" fill="#a5c19c"><path d="M0 -13 L8 3 L-8 3 Z"/><rect x="-1.2" y="3" width="2.4" height="5" fill="#9b7b58"/></g>
+          <g transform="translate(316 330)" fill="#8fb08a"><path d="M0 -16 L10 4 L-10 4 Z"/><rect x="-1.5" y="4" width="3" height="6" fill="#9b7b58"/></g>
+          <g transform="translate(26 450)" fill="#8fb08a"><path d="M0 -16 L10 4 L-10 4 Z"/><rect x="-1.5" y="4" width="3" height="6" fill="#9b7b58"/></g>
+          <g transform="translate(178 446)" fill="#a5c19c"><path d="M0 -14 L9 3 L-9 3 Z"/><rect x="-1.2" y="3" width="2.4" height="5" fill="#9b7b58"/></g>
+          <!-- flowers -->
+          <g transform="translate(250 232)"><circle r="3.2" fill="#f2b8b0"/><circle cx="9" cy="5" r="2.6" fill="#d8a23e"/><circle cx="-7" cy="6" r="2.4" fill="#f2b8b0"/></g>
+          <g transform="translate(120 340)"><circle r="3" fill="#d8a23e"/><circle cx="8" cy="-4" r="2.6" fill="#f2b8b0"/></g>
+          <g transform="translate(64 545)"><circle r="3" fill="#f2b8b0"/><circle cx="9" cy="3" r="2.6" fill="#d8a23e"/><circle cx="18" cy="-2" r="2.2" fill="#f2b8b0"/></g>
+          <!-- grass ticks -->
+          <g stroke="#8fb08a" stroke-width="1.6" stroke-linecap="round" fill="none">
+            <path d="M210 300 l3 -7 M215 300 l1 -8 M220 300 l-2 -7"/>
+            <path d="M40 228 l3 -7 M45 228 l1 -8 M50 228 l-2 -7"/>
+            <path d="M296 420 l3 -7 M301 420 l1 -8 M306 420 l-2 -7"/>
+            <path d="M130 520 l3 -7 M135 520 l1 -8 M140 520 l-2 -7"/>
+          </g>
+        </g>
+
+        <!-- trail (dotted base) -->
+        <g aria-hidden="true">
+          <path class="trail" d="M70 56 C 160 40, 262 80, 262 150"/>
+          <path class="trail" d="M262 150 C 262 220, 90 200, 78 262"/>
+          <path class="trail" d="M78 262 C 66 330, 258 300, 258 372"/>
+          <path class="trail" d="M258 372 C 258 440, 96 420, 90 482"/>
+          <path class="trail" d="M90 482 C 86 530, 190 556, 250 540"/>
+        </g>
+        <!-- trail (drawn as stops unlock) -->
+        <g aria-hidden="true">
+          <path class="trail-done" d="M70 56 C 160 40, 262 80, 262 150"/>
+          <path class="trail-done" d="M262 150 C 262 220, 90 200, 78 262"/>
+          <path class="trail-done" d="M78 262 C 66 330, 258 300, 258 372"/>
+          <path class="trail-done" d="M258 372 C 258 440, 96 420, 90 482"/>
+          <path class="trail-done" d="M90 482 C 86 530, 190 556, 250 540"/>
+        </g>
+
+        <!-- start -->
+        <g transform="translate(70 56)" aria-hidden="true">
+          <circle r="24" fill="#fff" stroke="#2f6b4a" stroke-width="2.5"/>
+          <text y="7" text-anchor="middle" font-size="20">🏡</text>
+          <text class="pin-label" x="34" y="-1">Your house</text>
+          <text class="pin-sub" x="34" y="19">straight after church ⛪</text>
+        </g>
+
+        <!-- stop 1 -->
+        <g transform="translate(262 150)">
+          <g class="pin locked" data-stop="1" role="button" tabindex="0" aria-label="Stop 1">
+            <g class="pin-body">
+              <rect class="hit" x="-132" y="-27" width="160" height="54" rx="14"/>
+              <circle class="pulse" r="23"/>
+              <circle class="pin-bg" r="23"/>
+              <text class="pin-icon" y="7" text-anchor="middle">?</text>
+              <text class="pin-label" x="-34" y="-1" text-anchor="end">Stop 1</text>
+              <text class="pin-sub" x="-34" y="19" text-anchor="end">locked</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- stop 2 -->
+        <g transform="translate(78 262)">
+          <g class="pin locked" data-stop="2" role="button" tabindex="0" aria-label="Stop 2">
+            <g class="pin-body">
+              <rect class="hit" x="-28" y="-27" width="160" height="54" rx="14"/>
+              <circle class="pulse" r="23"/>
+              <circle class="pin-bg" r="23"/>
+              <text class="pin-icon" y="7" text-anchor="middle">?</text>
+              <text class="pin-label" x="34" y="-1">Stop 2</text>
+              <text class="pin-sub" x="34" y="19">locked</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- stop 3 -->
+        <g transform="translate(258 372)">
+          <g class="pin locked" data-stop="3" role="button" tabindex="0" aria-label="Stop 3">
+            <g class="pin-body">
+              <rect class="hit" x="-132" y="-27" width="160" height="54" rx="14"/>
+              <circle class="pulse" r="23"/>
+              <circle class="pin-bg" r="23"/>
+              <text class="pin-icon" y="7" text-anchor="middle">?</text>
+              <text class="pin-label" x="-34" y="-1" text-anchor="end">Stop 3</text>
+              <text class="pin-sub" x="-34" y="19" text-anchor="end">locked</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- stop 4 (bonus) -->
+        <g transform="translate(90 482)">
+          <g class="pin locked" data-stop="4" role="button" tabindex="0" aria-label="Bonus stop">
+            <g class="pin-body">
+              <rect class="hit" x="-28" y="-27" width="160" height="54" rx="14"/>
+              <circle class="pulse" r="23"/>
+              <circle class="pin-bg" r="23"/>
+              <text class="pin-icon" y="7" text-anchor="middle">?</text>
+              <text class="pin-label" x="34" y="-1">Bonus ✨</text>
+              <text class="pin-sub" x="34" y="19">locked</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- finish -->
+        <g transform="translate(250 540)" aria-hidden="true">
+          <circle r="20" fill="#fde6e1" stroke="#d2574f" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="17">❤️</text>
+          <text class="pin-label" x="-30" y="-1" text-anchor="end">You &amp; me</text>
+          <text class="pin-sub" x="-30" y="19" text-anchor="end">all day long</text>
+        </g>
+      </svg>
+    </div>
+
+    <p class="map-hint" id="map-hint" aria-live="polite"></p>
+    <button class="btn btn-primary btn-block hidden" id="btn-ticket">Claim your ticket 🎟️</button>
+  </section>
+
+  <!-- ============ TICKET ============ -->
+  <section class="screen" id="screen-ticket">
+    <div class="ticket">
+      <div class="ticket-top">
+        <div class="photo-wrap small">
+          <img class="photo" src="photo.jpg" alt="Us" onerror="this.parentElement.classList.add('no-photo')">
+          <span class="photo-fallback" aria-hidden="true">❤️</span>
+        </div>
+        <p class="eyebrow">Admit one · Princess</p>
+        <h2>Surprise Sunday <em>Part II</em></h2>
+      </div>
+
+      <dl class="ticket-grid">
+        <div><dt>Date</dt><dd>Sunday, 22 November</dd></div>
+        <div><dt>Time</dt><dd>Straight after church ⛪<span>or after your dad's cricket 🏏 if he's playing</span></dd></div>
+        <div><dt>Pickup</dt><dd>Your house 🏡<span>I'll be at your door</span></dd></div>
+        <div><dt>Wear</dt><dd>Something cute you can walk in<span>Sneakers, not heels 👟</span></dd></div>
+        <div><dt>Bring</dt><dd>Sunnies, hat &amp; sunscreen 🕶️<span>plus a light jacket in case a November storm rolls in</span></dd></div>
+        <div><dt>Pack</dt><dd>Your competitive side 😤<span>and an appetite</span></dd></div>
+      </dl>
+
+      <div class="ticket-route" aria-label="Clues">
+        <div>⛳<small>fancy &amp; green</small></div>
+        <div>✊<small>earn your snacks</small></div>
+        <div>🧺<small>blanket &amp; trees</small></div>
+        <div>🍽️<small>still hungry?</small></div>
+      </div>
+
+      <div class="perf" aria-hidden="true"><i></i><i></i></div>
+
+      <div class="stub">
+        <div><small>Guest</small><b>Princess</b></div>
+        <div><small>Host</small><b>Your Husband</b></div>
+        <div><small>No.</small><b>002</b></div>
+        <div class="barcode" aria-hidden="true"></div>
+        <div class="barcode-caption" aria-hidden="true">SS·II · 22·11·26</div>
+      </div>
+    </div>
+
+    <div class="final">
+      <div class="sleeps" data-sleeps></div>
+      <p class="final-note">Your Husband cannot wait to spend the whole day with his Princess ❤️
+        <small>Screenshot this. It's your ticket in.</small></p>
+      <div class="stack">
+        <button class="btn btn-primary btn-block" id="btn-cal">Add to my calendar 📅</button>
+        <button class="btn btn-ghost btn-block" id="btn-map">See the route again</button>
+      </div>
+      <button class="link-btn" id="btn-reset">Play it all again</button>
+    </div>
+  </section>
+
+  <p class="sign">made with ❤️ by Your Husband</p>
+</main>
+
+<!-- ============ GAME SHEET ============ -->
+<div class="sheet-wrap" id="sheet" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <button class="sheet-close" id="sheet-close" aria-label="Back to the map">×</button>
+    <p class="eyebrow" id="sheet-eyebrow"></p>
+    <h3 id="sheet-title"></h3>
+    <p class="sheet-sub" id="sheet-sub"></p>
+    <div id="game"></div>
+  </div>
+</div>
+
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DATE = new Date(2026, 10, 22); // Sunday 22 November 2026
+
+  /* ---------- saved progress (per device) ---------- */
+  const KEY = 'surprise-sunday-part-2';
+  if (/[?&]reset\b/.test(location.search)) { try { localStorage.removeItem(KEY); } catch (e) {} }
+  let state = load();
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY));
+      if (s && typeof s === 'object') {
+        return { accepted: !!s.accepted, done: Math.min(4, Math.max(0, s.done | 0)) };
+      }
+    } catch (e) {}
+    return { accepted: false, done: 0 };
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  /* ---------- the four stops ---------- */
+  const STOPS = [
+    {
+      eyebrow: 'Stop 1 · Challenge', title: 'Sink the putt',
+      sub: 'Tap “Putt” while the marker is in the green zone. Get it in the hole to unlock your first clue.',
+      game: puttGame, icon: '⛳', hint: 'fancy & green',
+      clueTitle: 'Dress like you belong there',
+      clue: 'Our first stop is somewhere very green, very fancy, and full of things the pros use. We’re only <em>browsing</em>… so practise your best “I totally play” face 😌'
+    },
+    {
+      eyebrow: 'Stop 2 · Challenge', title: 'Beat me at Rock, Paper, Scissors',
+      sub: 'First to 2 wins. Choose wisely, Princess.',
+      game: rpsGame, icon: '✊', hint: 'earn your snacks',
+      clueTitle: 'Every snack must be earned',
+      clue: 'Nothing is free on Sunday. Drinks and snacks have to be <em>won</em>, and your hands decide what we eat. Keep practising that game… it will matter 👀'
+    },
+    {
+      eyebrow: 'Stop 3 · Challenge', title: 'Match the pairs',
+      sub: 'Find all six pairs to unlock Stop 3.',
+      game: memoryGame, icon: '🧺', hint: 'blanket & trees',
+      clueTitle: 'Lace up, Princess',
+      clue: 'Comfy shoes. A little bit uphill. Fresh air, flowers, and a blanket under the trees with <em>your name</em> on it 🌿'
+    },
+    {
+      eyebrow: 'Bonus round', title: 'Is there a bonus round?',
+      sub: 'Scratch the card to find out.',
+      game: scratchGame, icon: '🍽️', hint: 'still hungry?',
+      clueTitle: 'Still hungry?',
+      clue: 'If there’s any room left after all your winnings, the sun sets over a <em>table for two</em> 🕯️ No pressure… but Your Husband will be starving.'
+    }
+  ];
+
+  /* ---------- sleeps countdown ---------- */
+  function sleepsText() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const d = Math.round((DATE - today) / 86400000);
+    if (d > 1) return `🌙 ${d} sleeps until Sunday`;
+    if (d === 1) return '🌙 Just 1 more sleep!';
+    if (d === 0) return '☀️ It’s TODAY, Princess!';
+    return '❤️ Hope you loved Part II';
+  }
+  $$('[data-sleeps]').forEach(el => { el.textContent = sleepsText(); });
+
+  /* ---------- screens ---------- */
+  function show(id, smooth) {
+    $$('.screen').forEach(s => s.classList.toggle('active', s.id === id));
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- intro: yes / "no" ---------- */
+  const noLines = [
+    'Are you sure? 🥺',
+    'Your Husband is now sitting dramatically in the corner…',
+    'Wrong button, Princess 😌',
+    'Okay, that button has been fixed for you ❤️'
+  ];
+  let noCount = 0;
+  const btnYes = $('#btn-yes'), btnNo = $('#btn-no');
+  btnYes.addEventListener('click', accept);
+  btnNo.addEventListener('click', () => {
+    if (btnNo.dataset.fixed) return accept();
+    noCount++;
+    $('#no-msg').textContent = noLines[noCount - 1];
+    btnYes.style.transform = `scale(${1 + noCount * 0.12})`;
+    if (noCount >= noLines.length) {
+      btnNo.dataset.fixed = '1';
+      btnNo.textContent = 'Yes ❤️';
+      btnNo.className = 'btn btn-primary';
+      btnNo.style.transform = '';
+    } else {
+      btnNo.style.transform = `scale(${1 - noCount * 0.17})`;
+    }
+  });
+  function accept() {
+    if (state.accepted && $('#screen-map').classList.contains('active')) return;
+    state.accepted = true; save();
+    burst();
+    setTimeout(() => { show('screen-map', true); renderMap([]); }, 750);
+  }
+
+  /* ---------- map ---------- */
+  const legs = $$('.trail-done');
+  function legLength(p) {
+    let len = +p.dataset.len;
+    if (!len) { len = p.getTotalLength() || 420; if (len > 1) p.dataset.len = len; }
+    return len;
+  }
+  function renderMap(animate) {
+    animate = animate || [];
+    $$('.pin').forEach(pin => {
+      const n = +pin.dataset.stop, s = STOPS[n - 1];
+      const icon = $('.pin-icon', pin), sub = $('.pin-sub', pin);
+      pin.classList.remove('locked', 'current', 'done');
+      const name = n === 4 ? 'Bonus stop' : `Stop ${n}`;
+      if (n <= state.done) {
+        pin.classList.add('done'); icon.textContent = s.icon; sub.textContent = s.hint;
+        pin.setAttribute('aria-label', `${name}: ${s.hint}. Tap to read the clue again`);
+      } else if (n === state.done + 1) {
+        pin.classList.add('current'); icon.textContent = '?'; sub.textContent = 'tap me!';
+        pin.setAttribute('aria-label', `${name}: start the challenge`);
+      } else {
+        pin.classList.add('locked'); icon.textContent = '🔒'; sub.textContent = 'locked';
+        pin.setAttribute('aria-label', `${name}: locked`);
+      }
+    });
+
+    legs.forEach((p, i) => {
+      const on = i < state.done || (i === 4 && state.done === 4);
+      const len = legLength(p);
+      p.style.strokeDasharray = len;
+      if (on && animate.indexOf(i) !== -1 && !reduceMotion) {
+        p.style.transition = 'none';
+        p.style.strokeDashoffset = len;
+        p.getBoundingClientRect();
+        p.style.transition = '';
+        p.style.transitionDelay = (i === 4 && animate.length > 1) ? '1.2s' : '0s';
+        p.style.strokeDashoffset = 0;
+      } else {
+        p.style.strokeDashoffset = on ? 0 : len;
+      }
+    });
+
+    $$('#progress span').forEach((d, i) => d.classList.toggle('on', i < state.done));
+    const left = 4 - state.done;
+    $('#map-hint').textContent =
+      state.done === 0 ? 'Tap the glowing pin to begin ✨' :
+      state.done === 4 ? 'Every stop unlocked. Your ticket is ready 🎟️' :
+      `${left} to go. Keep going, Princess ✨`;
+    $('#btn-ticket').classList.toggle('hidden', state.done < 4);
+  }
+
+  $$('.pin').forEach(pin => {
+    const go = () => {
+      const n = +pin.dataset.stop;
+      if (n <= state.done) openSheet(n, true);
+      else if (n === state.done + 1) openSheet(n, false);
+      else {
+        const body = $('.pin-body', pin);
+        body.classList.remove('shake'); body.getBoundingClientRect(); body.classList.add('shake');
+        $('#map-hint').textContent = `Finish ${state.done + 1 === 4 ? 'the bonus' : 'Stop ' + (state.done + 1)} first, Princess 😌`;
+      }
+    };
+    pin.addEventListener('click', go);
+    pin.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  });
+
+  $('#btn-ticket').addEventListener('click', goTicket);
+  function goTicket() { show('screen-ticket', true); burst(); }
+
+  /* ---------- game sheet ---------- */
+  const sheet = $('#sheet'), game = $('#game');
+  let cleanup = null, pendingLegs = null, lastFocus = null;
+
+  function openSheet(n, review) {
+    const s = STOPS[n - 1];
+    if (cleanup) { cleanup(); cleanup = null; }
+    lastFocus = document.activeElement;
+    $('#sheet-eyebrow').textContent = s.eyebrow;
+    $('#sheet-title').textContent = s.title;
+    $('#sheet-sub').textContent = s.sub;
+    game.innerHTML = '';
+    sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    $('.sheet').scrollTop = 0;
+    if (review) showClue(n);
+    else cleanup = s.game(game, () => winStop(n));
+  }
+
+  function closeSheet() {
+    if (!sheet.classList.contains('open')) return;
+    if (cleanup) { cleanup(); cleanup = null; }
+    sheet.classList.remove('open');
+    sheet.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
+    if (pendingLegs) { const l = pendingLegs; pendingLegs = null; setTimeout(() => renderMap(l), 300); }
+  }
+
+  function winStop(n) {
+    if (state.done < n) {
+      state.done = n; save();
+      pendingLegs = n === 4 ? [3, 4] : [n - 1];
+    }
+    burst();
+    setTimeout(() => { if (sheet.classList.contains('open')) showClue(n); }, 900);
+  }
+
+  function showClue(n) {
+    const s = STOPS[n - 1];
+    if (cleanup) { cleanup(); cleanup = null; }
+    $('#sheet-eyebrow').textContent = n === 4 ? 'Bonus clue unlocked' : `Stop ${n} · clue unlocked`;
+    $('#sheet-title').textContent = s.clueTitle;
+    $('#sheet-sub').textContent = '';
+    const last = n === 4 && state.done === 4;
+    game.innerHTML = `
+      <div class="clue">
+        <div class="clue-icon" aria-hidden="true">${s.icon}</div>
+        <p class="clue-text">${s.clue}</p>
+        <button class="btn btn-primary btn-block" id="clue-next">${last ? 'Claim your ticket 🎟️' : 'Back to the map →'}</button>
+      </div>`;
+    $('#clue-next').addEventListener('click', () => {
+      closeSheet();
+      if (last) setTimeout(goTicket, 150);
+    });
+  }
+
+  $('#sheet-close').addEventListener('click', closeSheet);
+  sheet.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+  /* helper: timers that get cancelled when the sheet closes */
+  function timerBag() {
+    const ids = [];
+    return {
+      later(fn, ms) { ids.push(setTimeout(fn, ms)); },
+      clear() { ids.forEach(clearTimeout); ids.length = 0; }
+    };
+  }
+
+  /* ================= GAME 1: putt ================= */
+  function puttGame(root, onWin) {
+    root.innerHTML = `
+      <div class="track" aria-hidden="true">
+        <div class="hole"><span class="flag"></span></div>
+        <div class="ball"></div>
+      </div>
+      <div class="meter" aria-hidden="true"><div class="zone"></div><div class="needle"></div></div>
+      <div class="meter-labels" aria-hidden="true"><span>gentle</span><span>way too hard</span></div>
+      <button class="btn btn-primary btn-block" id="putt-btn">Putt 🏌️‍♀️</button>
+      <p class="game-msg" aria-live="polite">Wait for the green zone, then tap.</p>`;
+    const ball = $('.ball', root), needle = $('.needle', root), zone = $('.zone', root);
+    const btn = $('#putt-btn', root), msg = $('.game-msg', root);
+    const t = timerBag();
+    const HOLE = 138; // px from ball to hole
+    let zs = 0.6, ze = 0.8, period = 1400;
+    let p = 0, raf = 0, t0 = performance.now(), tries = 0, busy = false;
+
+    const setZone = () => { zone.style.left = (zs * 100) + '%'; zone.style.width = ((ze - zs) * 100) + '%'; };
+    setZone();
+
+    function tick(now) {
+      const x = ((now - t0) % period) / period;
+      p = x < 0.5 ? x * 2 : 2 - x * 2;
+      needle.style.left = (p * 100) + '%';
+      raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+
+    const short = ['A little short! Give it some more love 💪', 'Sooo close… the hole is right there 😅', 'Gentle is cute, but we need a bit more power'];
+    const long = ['Too strong! That one’s in the bushes 🌳', 'Whoa, easy Tiger 😂 Softer this time', 'That ball is on its way to Joburg 😅'];
+
+    btn.addEventListener('click', () => {
+      if (busy) return;
+      busy = true; btn.disabled = true;
+      cancelAnimationFrame(raf);
+      tries++;
+
+      if (p >= zs && p <= ze) {
+        ball.style.transform = `translateY(-${HOLE}px)`;
+        msg.textContent = 'It’s rolling…';
+        t.later(() => {
+          ball.style.transition = 'transform .3s, opacity .3s';
+          ball.style.transform = `translateY(-${HOLE}px) scale(.4)`;
+          ball.style.opacity = '0';
+          msg.textContent = tries === 1 ? 'HOLE IN ONE! 🏆 Okay, show-off.' : `It’s in! 🏆 Only took ${tries} tries 😌`;
+        }, 1000);
+        t.later(onWin, 1700);
+        return;
+      }
+
+      if (p < zs) {
+        const d = Math.max(28, (p / zs) * HOLE * 0.8);
+        ball.style.transform = `translateY(-${d}px)`;
+        msg.textContent = pick(short);
+      } else {
+        const dir = Math.random() < 0.5 ? -1 : 1;
+        ball.style.transform = `translate(${dir * 46}px, -${HOLE + 115}px)`;
+        msg.textContent = pick(long);
+      }
+
+      t.later(() => {
+        ball.style.transition = 'none';
+        ball.style.transform = '';
+        ball.getBoundingClientRect();
+        ball.style.transition = '';
+        if (tries === 3) {
+          zs = 0.5; ze = 0.86; period = 1800; setZone();
+          msg.textContent = 'Psst… Your Husband secretly made the zone bigger 🤫';
+        }
+        busy = false; btn.disabled = false;
+        t0 = performance.now();
+        raf = requestAnimationFrame(tick);
+      }, 1500);
+    });
+
+    return () => { cancelAnimationFrame(raf); t.clear(); };
+  }
+
+  /* ================= GAME 2: rock paper scissors ================= */
+  function rpsGame(root, onWin) {
+    const E = { rock: '✊', paper: '✋', scissors: '✌️' };
+    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' }; // key beats value
+    root.innerHTML = `
+      <div class="score">
+        <div><span>You</span><b id="s-you">0</b></div>
+        <div class="vs">first to 2</div>
+        <div><span>Your Husband</span><b id="s-him">0</b></div>
+      </div>
+      <div class="arena" aria-hidden="true">
+        <div class="hand" id="h-you">✊</div>
+        <div class="hand him" id="h-him"><span>✊</span></div>
+      </div>
+      <p class="game-msg" aria-live="polite">Choose your move, Princess</p>
+      <div class="choices">
+        <button data-m="rock">✊<small>Rock</small></button>
+        <button data-m="paper">✋<small>Paper</small></button>
+        <button data-m="scissors">✌️<small>Scissors</small></button>
+      </div>
+      <button class="btn btn-ghost btn-block hidden" id="rematch">Rematch 😤</button>`;
+    const hy = $('#h-you', root), hh = $('#h-him', root), hhs = $('#h-him span', root);
+    const msg = $('.game-msg', root), sy = $('#s-you', root), sh = $('#s-him', root);
+    const buttons = $$('.choices button', root), rematch = $('#rematch', root);
+    const t = timerBag();
+    let you = 0, him = 0, busy = false;
+
+    const setEnabled = on => buttons.forEach(b => { b.disabled = !on; });
+
+    // He "plays fair"... mostly. A gentleman lets his Princess win a bit more often.
+    function hisMove(m) {
+      const r = Math.random();
+      const losing = beats[m];
+      const winning = Object.keys(beats).find(k => beats[k] === m);
+      if (r < 0.5) return losing;
+      if (r < 0.72) return m;
+      return winning;
+    }
+
+    buttons.forEach(b => b.addEventListener('click', () => {
+      if (busy) return;
+      busy = true; setEnabled(false);
+      const m = b.dataset.m;
+      hy.textContent = '✊'; hhs.textContent = '✊';
+      hy.classList.add('pumping'); hh.classList.add('pumping');
+      ['Rock…', 'Paper…', 'Scissors…'].forEach((w, i) => t.later(() => { msg.textContent = w; }, i * 300));
+
+      t.later(() => {
+        hy.classList.remove('pumping'); hh.classList.remove('pumping');
+        const h = hisMove(m);
+        hy.textContent = E[m]; hhs.textContent = E[h];
+        if (m === h) msg.textContent = 'Draw! Great minds 🤝';
+        else if (beats[m] === h) { you++; msg.textContent = pick(['Point to Princess! 🎉', 'He did not see that coming 😂', 'Ouch. He’s pretending that didn’t hurt']); }
+        else { him++; msg.textContent = pick(['Point to Your Husband 😏', 'He’s being very smug about that one…', 'Nooo! Shake it off 💪']); }
+        sy.textContent = you; sh.textContent = him;
+
+        if (you === 2) {
+          msg.textContent = 'You beat him! 🏆 He already wants a rematch on Sunday 👀';
+          t.later(onWin, 1500);
+          return;
+        }
+        if (him === 2) {
+          msg.textContent = 'Your Husband wins 😏 He’s doing a very annoying victory dance.';
+          rematch.classList.remove('hidden');
+          return;
+        }
+        busy = false; setEnabled(true);
+      }, 950);
+    }));
+
+    rematch.addEventListener('click', () => {
+      you = 0; him = 0; sy.textContent = '0'; sh.textContent = '0';
+      hy.textContent = '✊'; hhs.textContent = '✊';
+      rematch.classList.add('hidden');
+      msg.textContent = 'Round two. No mercy 😤';
+      busy = false; setEnabled(true);
+    });
+
+    return () => t.clear();
+  }
+
+  /* ================= GAME 3: memory match ================= */
+  function memoryGame(root, onWin) {
+    const icons = ['🌿', '🌸', '🦋', '🧺', '🍓', '👟'];
+    const deck = shuffle(icons.concat(icons));
+    root.innerHTML = `
+      <div class="memory">
+        ${deck.map((ic, i) => `<button class="mcard" data-i="${i}" aria-label="Hidden card"><span class="inner"><span class="face back">❤</span><span class="face front">${ic}</span></span></button>`).join('')}
+      </div>
+      <p class="game-msg" aria-live="polite">Moves: 0</p>`;
+    const msg = $('.game-msg', root), t = timerBag();
+    let first = null, lock = false, moves = 0, found = 0;
+
+    $('.memory', root).addEventListener('click', e => {
+      const c = e.target.closest('.mcard');
+      if (!c || lock || c.classList.contains('flip') || c.classList.contains('matched')) return;
+      c.classList.add('flip');
+      c.setAttribute('aria-label', deck[c.dataset.i]);
+      if (!first) { first = c; return; }
+
+      moves++;
+      if (deck[first.dataset.i] === deck[c.dataset.i]) {
+        first.classList.add('matched'); c.classList.add('matched');
+        first = null; found++;
+        msg.textContent = found === 6 ? `All pairs in ${moves} moves! 🌸` : `Moves: ${moves} · ${pick(['Nice! 🌸', 'Yesss 💚', 'Look at that memory 😮', 'Pair!'])}`;
+        if (found === 6) t.later(onWin, 1000);
+      } else {
+        lock = true;
+        const a = first; first = null;
+        msg.textContent = `Moves: ${moves}`;
+        t.later(() => {
+          a.classList.remove('flip'); c.classList.remove('flip');
+          a.setAttribute('aria-label', 'Hidden card'); c.setAttribute('aria-label', 'Hidden card');
+          lock = false;
+        }, 800);
+      }
+    });
+
+    return () => t.clear();
+  }
+
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  /* ================= GAME 4: scratch card ================= */
+  function scratchGame(root, onWin) {
+    root.innerHTML = `
+      <div class="scratch">
+        <div class="scratch-under"><div><div class="big">🍽️</div><strong>Bonus round: unlocked</strong><br>…but only if you’re still hungry 😌</div></div>
+        <canvas aria-label="Scratch card. Rub it with your finger."></canvas>
+      </div>
+      <p class="game-msg" aria-live="polite">Use your finger to scratch the card ✨</p>`;
+    const wrap = $('.scratch', root), cv = $('canvas', root), ctx = cv.getContext('2d');
+    const msg = $('.game-msg', root), t = timerBag();
+    let done = false, drawing = false, last = null, moves = 0;
+
+    function paint() {
+      const r = wrap.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = r.width, h = r.height;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+      const g = ctx.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, '#c49a45'); g.addColorStop(.5, '#efd593'); g.addColorStop(1, '#b8892f');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(255,255,255,.4)';
+      for (let i = 0; i < 80; i++) { ctx.beginPath(); ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.8 + .4, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = 'rgba(70,45,10,.8)';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '700 26px Fraunces, Georgia, serif';
+      ctx.fillText('Scratch me ✨', w / 2, h / 2 - 10);
+      ctx.font = '500 14px "DM Sans", system-ui, sans-serif';
+      ctx.fillText('is there a bonus round?', w / 2, h / 2 + 20);
+    }
+    paint();
+
+    function pos(e) { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    function scratch(a, b) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = '#000'; ctx.fillStyle = '#000';
+      ctx.lineWidth = 46; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      ctx.beginPath(); ctx.arc(b.x, b.y, 23, 0, Math.PI * 2); ctx.fill();
+    }
+    function check() {
+      if (done) return;
+      const data = ctx.getImageData(0, 0, cv.width, cv.height).data;
+      let clear = 0, total = 0;
+      for (let i = 3; i < data.length; i += 4 * 23) { total++; if (data[i] < 40) clear++; }
+      const pct = clear / total;
+      if (pct > 0.5) {
+        done = true;
+        cv.style.opacity = '0';
+        cv.style.pointerEvents = 'none';
+        msg.textContent = 'Bonus round confirmed 😌';
+        t.later(onWin, 1200);
+      } else if (pct > 0.18) {
+        msg.textContent = 'Keep going… ✨';
+      }
+    }
+    cv.addEventListener('pointerdown', e => {
+      if (done) return;
+      drawing = true; last = pos(e);
+      try { cv.setPointerCapture(e.pointerId); } catch (err) {}
+      scratch(last, last);
+    });
+    cv.addEventListener('pointermove', e => {
+      if (!drawing || done) return;
+      const p = pos(e); scratch(last, p); last = p;
+      if (++moves % 6 === 0) check();
+    });
+    const end = () => { if (drawing) { drawing = false; check(); } };
+    cv.addEventListener('pointerup', end);
+    cv.addEventListener('pointercancel', end);
+
+    return () => t.clear();
+  }
+
+  /* ---------- ticket buttons ---------- */
+  $('#btn-map').addEventListener('click', () => { show('screen-map', true); renderMap([]); });
+  $('#btn-reset').addEventListener('click', () => {
+    state = { accepted: false, done: 0 }; save();
+    location.reload();
+  });
+  $('#btn-cal').addEventListener('click', () => {
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Surprise Sunday//Part II//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:surprise-sunday-part-2-20261122',
+      'DTSTAMP:20261117T080000Z',
+      'DTSTART;VALUE=DATE:20261122',
+      'DTEND;VALUE=DATE:20261123',
+      'SUMMARY:Surprise Sunday: Part II ❤️',
+      "DESCRIPTION:Pickup at your house straight after church (or after your dad's cricket). Wear something cute you can walk in. Bring sunnies\\, a hat and an appetite!",
+      'LOCATION:Your house',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'surprise-sunday-part-2.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+
+  /* ---------- confetti ---------- */
+  function burst() {
+    if (reduceMotion || !Element.prototype.animate) return;
+    const layer = $('#confetti');
+    const cx = window.innerWidth / 2, cy = window.innerHeight * 0.42;
+    const colors = ['#d2574f', '#f2b8b0', '#d8a23e', '#2f6b4a', '#b9cfb1', '#ffffff'];
+    for (let i = 0; i < 42; i++) {
+      const el = document.createElement('span');
+      el.className = 'bit';
+      if (i % 6 === 0) { el.textContent = '❤️'; el.classList.add('heart'); }
+      else el.style.background = colors[i % colors.length];
+      el.style.left = cx + 'px'; el.style.top = cy + 'px';
+      layer.appendChild(el);
+      const ang = Math.random() * Math.PI * 2, dist = 80 + Math.random() * 170;
+      const dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist - 70;
+      const anim = el.animate([
+        { transform: 'translate(0,0) scale(.4) rotate(0deg)', opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px) scale(1) rotate(${Math.random() * 360}deg)`, opacity: 1, offset: .55 },
+        { transform: `translate(${dx * 1.15}px, ${dy + 160}px) scale(.9) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+      ], { duration: 1500 + Math.random() * 700, easing: 'cubic-bezier(.15,.7,.3,1)' });
+      anim.onfinish = () => el.remove();
+    }
+  }
+
+  /* ---------- falling petals ---------- */
+  function petals() {
+    if (reduceMotion) return;
+    const layer = $('#petals');
+    const cols = ['#f2b8b0', '#b9cfb1', '#e9c46a', '#f7d6d0', '#a5c19c'];
+    function spawn() {
+      if (document.hidden) return;
+      const p = document.createElement('span');
+      const size = 8 + Math.random() * 10, dur = 9 + Math.random() * 7;
+      p.className = 'petal';
+      p.style.width = size + 'px'; p.style.height = size + 'px';
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.background = cols[Math.floor(Math.random() * cols.length)];
+      p.style.animationDuration = dur + 's';
+      p.style.setProperty('--drift', (Math.random() * 160 - 80) + 'px');
+      p.style.setProperty('--spin', (Math.random() * 540 - 270) + 'deg');
+      layer.appendChild(p);
+      setTimeout(() => p.remove(), dur * 1000 + 300);
+    }
+    for (let i = 0; i < 5; i++) setTimeout(spawn, i * 500);
+    setInterval(spawn, 1200);
+  }
+
+  /* ---------- start ---------- */
+  if (state.done === 4) show('screen-ticket');
+  else if (state.accepted) { show('screen-map'); renderMap([]); }
+  else show('screen-intro');
+  petals();
+})();
+</script>
+</body>
+</html>
